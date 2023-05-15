@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -22,8 +23,14 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
+        $email = $request->email;
+        $password = $request->password;
+
+        Log::info("Email: $email");
+        Log::info("Password: $password");
+
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {

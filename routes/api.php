@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -20,16 +21,23 @@ use App\Http\Controllers\UserController;
 //});
 
 Route::group([
-
     'middleware' => 'api',
     'prefix' => 'auth'
-
 ], function ($router) {
+    Route::post('/login',[AuthController::class,'login']);
+    Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/refresh',[AuthController::class,'refresh']);
+    Route::post('/me',[AuthController::class,'me']);
 
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+});
+
+// Group post APIs
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'post'
+], function ($router) {
+    Route::post('/new',[PostController::class,'createPost']);
 
 });
 
