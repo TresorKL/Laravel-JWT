@@ -36,11 +36,18 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
+        'api' => [
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
+//    'guards' => [
+//        'web' => [
+//            'driver' => 'session',
+//            'provider' => 'users',
+//        ],
+//
+//    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -60,15 +67,14 @@ return [
     */
 
     'providers' => [
-//        'users' => [
-//            'driver' => 'eloquent',
-//            'model' => App\Models\User::class,
-//        ],
-
-         'users' => [
-             'driver' => 'jwt',
-             'table' => 'users',
-         ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'jwt' => [
+            'driver' => 'jwt',
+            'table' => 'users',
+        ],
     ],
 
     /*
